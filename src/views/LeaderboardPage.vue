@@ -4,7 +4,9 @@
 </template>
 
 <script setup lang="ts">
-import Leaderboard from "../components/Leaderboard.vue";
+    import Leaderboard from "../components/Leaderboard.vue";
 </script>
 
-<style scoped></style>
+<style scoped>
+    
+</style>
