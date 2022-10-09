@@ -47,7 +47,7 @@
                                                 <th>Amount</th>
                                                 <th>Increase</th>
                                             </tr>
-                                            <tr>
+                                            <tr> 
                                                 <th>$ Saved</th>
                                                 <th>$20</th>
                                                 <th>↗︎ $3</th>
