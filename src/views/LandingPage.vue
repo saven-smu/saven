@@ -11,7 +11,7 @@
                     assumenda excepturi exercitationem quasi. In deleniti eaque
                     aut repudiandae et a id nisi.
                 </p>
-                <router-link to="/LogInPage">
+                <router-link to="/login">
                     <button class="btn btn-secondary">Get Started</button>
                 </router-link>
             </div>
