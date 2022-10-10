@@ -8,6 +8,7 @@
         "preview": "vite preview"
     },
     "dependencies": {
+        "@auth0/auth0-vue": "^1.0.2",
         "@vueuse/core": "^9.3.0",
         "ky": "^0.31.3",
         "vue": "^3.2.40",
