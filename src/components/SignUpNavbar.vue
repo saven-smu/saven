@@ -1,8 +1,9 @@
 <template>
   <div class="navbar bg-primary">
     <div class="flex-1">
-      <router-link to="/"><img src="https://cdn.discordapp.com/attachments/853567678479597578/1028884890185379910/saven_logo.png"
-        width="120" height="60" /></router-link>
+      <router-link to="/"><img
+          src="https://cdn.discordapp.com/attachments/853567678479597578/1028884890185379910/saven_logo.png" width="120"
+          height="60" /></router-link>
 
     </div>
     <div class="flex-none">
@@ -25,11 +26,10 @@
           </ul>
         </li>
         <li><a>About Us</a></li>
-        <li>
-          <router-link to="/login">
-            <a class="btn btn-secondary">Sign Up</a>
-          </router-link>
-        </li>
+        <router-link to="/login">
+          <a class="btn btn-secondary text-[#FFFFF9]">Sign Up</a>
+        </router-link>
+
       </ul>
     </div>
   </div>

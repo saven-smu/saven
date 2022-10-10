@@ -16,9 +16,9 @@ module.exports = {
                 saven: {
                     primary: "#A0CED9",
 
-                    secondary: "#FFC09F",
+                    secondary: "#FF9B66",
 
-                    accent: "#ADF7B6",
+                    accent: "#68EC78",
 
                     neutral: "#FCF5C7",
 

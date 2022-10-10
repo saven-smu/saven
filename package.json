@@ -8,6 +8,8 @@
         "preview": "vite preview"
     },
     "dependencies": {
+        "@dicebear/avatars": "^4.10.5",
+        "@dicebear/open-peeps": "^4.10.5",
         "@vueuse/core": "^9.3.0",
         "ky": "^0.31.3",
         "vue": "^3.2.40",
