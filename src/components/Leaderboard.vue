@@ -216,5 +216,5 @@ const incrementRank = () => {
 
 
 <style scoped>
-.details {}
+/* .details {} */
 </style>

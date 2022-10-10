@@ -10,6 +10,7 @@ const incrementCount = () => {
 </script>
 
 <template>
+  <div id="home-page" class="bg-danger"></div>
   <h1>{{ msg }}</h1>
 
   <div class="card">
@@ -24,7 +25,7 @@ const incrementCount = () => {
     Check out
     <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank"
       >create-vue</a
-    >, the official Vue + Vite starter
+    >, the official Vue + Vite start
   </p>
   <p>
     Install
@@ -36,6 +37,6 @@ const incrementCount = () => {
 
 <style scoped>
 .read-the-docs {
-  color: #888;
+  color: rgb(241, 19, 19);
 }
 </style>
