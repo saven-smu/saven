@@ -10,7 +10,7 @@
 
                     Take your step to be more environmentally conscious here.
                 </p>
-                <router-link to="/login">
+                <router-link to="/leaderboard">
                     <button class="btn btn-secondary text-[#FFFFF9]">Get Started</button>
                 </router-link>
             </div>
