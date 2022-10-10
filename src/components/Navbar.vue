@@ -46,18 +46,20 @@
                     <li><a>Item 3</a></li>
                 </ul>
             </div>
-            <div class="flex-1">
-                <img
-                    src="https://cdn.discordapp.com/attachments/853567678479597578/1028884890185379910/saven_logo.png"
-                    width="120"
-                    height="60"
-                />
-            </div>
+            <router-link to="/" class="flex-1">
+                <picture>
+                    <source
+                        srcset="../assets/saven_logo_56px.webp"
+                        type="image/webp"
+                    />
+                    <img class="max-h-14" src="../assets/saven_logo.png" />
+                </picture>
+            </router-link>
         </div>
         <div class="navbar-center hidden lg:flex">
             <ul class="menu menu-horizontal p-0">
                 <li>
-                    <router-link to="/leaderboard">Leaderboard!</router-link>
+                    <router-link to="/leaderboard">Leaderboard</router-link>
                 </li>
                 <li tabindex="0">
                     <a>
@@ -83,13 +85,20 @@
             </ul>
         </div>
         <div class="navbar-end">
-            <router-link to="/login">
-                <a class="btn btn-secondary">Sign Up</a>
+            <router-link to="/login" v-if="isAuth">
+                <a class="btn btn-secondary">Sign Up / Login</a>
+            </router-link>
+            <router-link to="/login" v-else>
+                <a class="btn btn-secondary">Logout</a>
             </router-link>
         </div>
     </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from "vue";
+
+const isAuth = ref(false);
+</script>
 
 <style scoped></style>
