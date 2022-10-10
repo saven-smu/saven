@@ -1,5 +1,4 @@
 <template>
-    <Navbar />
     <div class="hero bg-gradient-to-b from-primary to-white">
         <div class="hero-content flex-col lg:flex-row-reverse">
             <img src="../assets/saven_landing.png" width="600" height="600" />
@@ -20,7 +19,6 @@
 </template>
 
 <script setup lang="ts">
-import Navbar from "../components/Navbar.vue";
 </script>
 
 <style scoped>
