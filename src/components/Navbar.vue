@@ -47,11 +47,13 @@
                 </ul>
             </div>
             <div class="flex-1">
-                <img
-                    src="https://cdn.discordapp.com/attachments/853567678479597578/1028884890185379910/saven_logo.png"
-                    width="120"
-                    height="60"
-                />
+                <picture>
+                    <source
+                        srcset="../assets/saven_logo_56px.webp"
+                        type="image/webp"
+                    />
+                    <img class="max-h-14" src="../assets/saven_logo.png" />
+                </picture>
             </div>
         </div>
         <div class="navbar-center hidden lg:flex">
