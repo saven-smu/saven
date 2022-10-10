@@ -85,20 +85,35 @@
             </ul>
         </div>
         <div class="navbar-end">
-            <router-link to="/login" v-if="isAuth">
-                <a class="btn btn-secondary">Sign Up / Login</a>
-            </router-link>
-            <router-link to="/login" v-else>
-                <a class="btn btn-secondary">Logout</a>
-            </router-link>
+            <button
+                class="btn btn-secondary"
+                @click="login"
+                v-if="!isAuthenticated"
+            >
+                Sign Up / Login
+            </button>
+            <button class="btn btn-secondary" @click="onClickLogout" v-else>
+                Logout
+            </button>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { useAuth0 } from "@auth0/auth0-vue";
 
-const isAuth = ref(false);
+const { isAuthenticated, loginWithPopup, logout } = useAuth0();
+
+const login = async () => {
+    try {
+        await loginWithPopup();
+    } catch (error) {}
+};
+const onClickLogout = async () => {
+    try {
+        await logout();
+    } catch (error) {}
+};
 </script>
 
 <style scoped></style>
