@@ -1,7 +1,8 @@
 <template>
-    <div class="navbar bg-base-100">
+    <div class="navbar bg-primary">
         <div class="navbar-start">
             <div class="dropdown">
+                <!-- i wanna make the hamburger bring out a drawer like daisyUI but it makes the navbar Phat -->
                 <label tabindex="0" class="btn btn-ghost btn-circle">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">

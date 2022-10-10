@@ -35,9 +35,12 @@
                     </td>
                     <td>$560.32</td>
                     <th>
-                        <div class="dropdown dropdown-end">
-                            <label tabindex="0" class="btn btn-ghost btn-xs">drop Details</label>
-                            <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-200">
+                        <div class="collapse">
+                            <input type="checkbox" />
+                            <div class="collapse-title btn btn-ghost btn-xs justify-start">
+                                collapse details
+                            </div>
+                            <div class="collapse-content">
                                 <div class="overflow-x-auto">
                                     <table class="table w-full">
                                         <!-- head -->
@@ -45,17 +48,12 @@
                                             <tr>
                                                 <th>Thing</th>
                                                 <th>Amount</th>
-                                                <th>Increase</th>
-                                            </tr>
-                                            <tr> 
-                                                <th>$ Saved</th>
-                                                <th>$20</th>
-                                                <th>↗︎ $3</th>
+                                                <th>Improvement</th>
                                             </tr>
                                         </thead>
                                     </table>
                                 </div>
-                            </ul>
+                            </div>
                         </div>
                     </th>
                 </tr>
@@ -82,9 +80,12 @@
                     </td>
                     <td>$560.32</td>
                     <th>
-                        <div class="dropdown dropdown-hover">
-                            <label tabindex="0" class="btn btn-ghost btn-xs">Hover details</label>
-                            <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-200">
+                        <div class="collapse">
+                            <input type="checkbox" />
+                            <div class="collapse-title btn btn-ghost btn-xs justify-start">
+                                collapse details
+                            </div>
+                            <div class="collapse-content">
                                 <div class="overflow-x-auto">
                                     <table class="table w-full">
                                         <!-- head -->
@@ -92,17 +93,12 @@
                                             <tr>
                                                 <th>Thing</th>
                                                 <th>Amount</th>
-                                                <th>Increase</th>
-                                            </tr>
-                                            <tr>
-                                                <th>$ Saved</th>
-                                                <th>$20</th>
-                                                <th>↗︎ $3</th>
+                                                <th>Improvement</th>
                                             </tr>
                                         </thead>
                                     </table>
                                 </div>
-                            </ul>
+                            </div>
                         </div>
                     </th>
                 </tr>
