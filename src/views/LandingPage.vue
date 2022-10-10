@@ -1,6 +1,6 @@
 <template>
-    <SignUpNavbar />
-    <div class="hero bg-gradient-to-b from-primary to-bg-base-100">
+    <Navbar />
+    <div class="hero bg-gradient-to-b from-primary to-white">
         <div class="hero-content flex-col lg:flex-row-reverse">
             <img src="../assets/saven_landing.png" width="600" height="600" />
             <div class="p-8 shadow-accent bg-base-100/40 rounded-box">
@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import SignUpNavbar from "../components/SignUpNavbar.vue";
+import Navbar from "../components/Navbar.vue";
 </script>
 
 <style scoped>
