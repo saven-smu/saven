@@ -9,7 +9,11 @@
     },
     "dependencies": {
         "@auth0/auth0-vue": "^1.0.2",
+        "@dicebear/avatars": "^4.10.5",
+        "@dicebear/open-peeps": "^4.10.5",
+        "@formkit/auto-animate": "^1.0.0-beta.3",
         "@vueuse/core": "^9.3.0",
+        "@vueuse/motion": "^2.0.0-beta.12",
         "ky": "^0.31.3",
         "vue": "^3.2.40",
         "vue-nav-tabs": "^0.5.7",

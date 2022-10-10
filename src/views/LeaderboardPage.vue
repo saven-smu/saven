@@ -1,14 +1,13 @@
 <template>
-    <Navbar />
-    <Leaderboard />
-    <router-link class="btn btn-primary" to="/">To Landing!</router-link>
+    <div class="bg-gradient-to-b from-primary to-white">
+        <div class="container mx-auto pt-8">
+            <Leaderboard />
+        </div>
+    </div>
 </template>
 
 <script setup lang="ts">
-    import Navbar from "../components/Navbar.vue";
-    import Leaderboard from "../components/Leaderboard.vue";
+import Leaderboard from "../components/Leaderboard.vue";
 </script>
 
-<style scoped>
-    
-</style>
+<style scoped></style>

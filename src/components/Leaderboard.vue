@@ -1,220 +1,149 @@
 <template>
-    <div class="overflow-x-auto w-full">
-        <table class="table w-full">
-            <!-- head -->
-            <thead>
-                <tr>
-                    <th>Rank</th>
-                    <th>Username</th>
-                    <th>Score</th>
-                    <th>Amount saved</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- row 1 -->
-                <tr class="hover">
-                    <th>{{ rank }}</th>
-                    <td>
-                        <div class="flex items-center space-x-3">
-                            <div class="avatar">
-                                <div class="mask mask-squircle w-12 h-12">
-                                    <img src="https://cdn.discordapp.com/attachments/714005602967224323/1015678209993478144/unknown.png"
-                                        alt="Avatar" />
-                                </div>
-                            </div>
-                            <div>
-                                <div class="font-bold">Hugh Amongus</div>
-                                <span class="badge badge-ghost badge-sm">🏅 Top 10, Aug 2022 🏅</span>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        4328
-                        <br>
-                    </td>
-                    <td>$560.32</td>
-                    <th>
-                        <div class="dropdown dropdown-end">
-                            <label tabindex="0" class="btn btn-ghost btn-xs">drop Details</label>
-                            <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-200">
-                                <div class="overflow-x-auto">
-                                    <table class="table w-full">
-                                        <!-- head -->
-                                        <thead>
-                                            <tr>
-                                                <th>Thing</th>
-                                                <th>Amount</th>
-                                                <th>Increase</th>
-                                            </tr>
-                                            <tr> 
-                                                <th>$ Saved</th>
-                                                <th>$20</th>
-                                                <th>↗︎ $3</th>
-                                            </tr>
-                                        </thead>
-                                    </table>
-                                </div>
-                            </ul>
-                        </div>
-                    </th>
-                </tr>
-                <!-- row 2 -->
-                <tr class="hover">
-                    <th>{{ rank }}</th>
-                    <td>
-                        <div class="flex items-center space-x-3">
-                            <div class="avatar">
-                                <div class="mask mask-squircle w-12 h-12">
-                                    <img src="https://cdn.discordapp.com/attachments/714005602967224323/1019635423397548073/unknown.png"
-                                        alt="Avatar" />
-                                </div>
-                            </div>
-                            <div>
-                                <div class="font-bold">Brice Swyre</div>
-                                <span class="badge badge-ghost badge-sm">5 years of using SavEn!</span>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        4328
-                        <br>
-                    </td>
-                    <td>$560.32</td>
-                    <th>
-                        <div class="dropdown dropdown-hover">
-                            <label tabindex="0" class="btn btn-ghost btn-xs">Hover details</label>
-                            <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-200">
-                                <div class="overflow-x-auto">
-                                    <table class="table w-full">
-                                        <!-- head -->
-                                        <thead>
-                                            <tr>
-                                                <th>Thing</th>
-                                                <th>Amount</th>
-                                                <th>Increase</th>
-                                            </tr>
-                                            <tr>
-                                                <th>$ Saved</th>
-                                                <th>$20</th>
-                                                <th>↗︎ $3</th>
-                                            </tr>
-                                        </thead>
-                                    </table>
-                                </div>
-                            </ul>
-                        </div>
-                    </th>
-                </tr>
-                <!-- row 3 -->
-                <tr class="hover">
-                    <th>3</th>
-                    <td>
-                        <div class="flex items-center space-x-3">
-                            <div class="avatar">
-                                <div class="mask mask-squircle w-12 h-12">
-                                    <img src="https://cdn.discordapp.com/attachments/714005602967224323/1019650743801753661/unknown.png"
-                                        alt="Avatar" />
-                                </div>
-                            </div>
-                            <div>
-                                <div class="font-bold">Marjy Ferencz</div>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        4328
-                        <br>
-                    </td>
-                    <td>$560.32</td>
-                    <th>
-                        <div class="collapse">
-                            <input type="checkbox" />
-                            <div class="collapse-title btn btn-ghost btn-xs justify-start">
-                                collapse details
-                            </div>
-                            <div class="collapse-content">
-                                <div class="overflow-x-auto">
-                                    <table class="table w-full">
-                                        <!-- head -->
-                                        <thead>
-                                            <tr>
-                                                <th>Thing</th>
-                                                <th>Amount</th>
-                                                <th>Improvement</th>
-                                            </tr>
-                                        </thead>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- <label for="modal-details" class="btn btn-ghost btn-xs">collapse details</label> -->
-                    </th>
-                </tr>
-                <!-- row 4 -->
-                <tr class="hover">
-                    <th>4</th>
-                    <td>
-                        <div class="flex items-center space-x-3">
-                            <div class="avatar">
-                                <div class="mask mask-squircle w-12 h-12">
-                                    <img src="https://cdn.discordapp.com/attachments/714005602967224323/1015678445000327278/unknown.png"
-                                        alt="Avatar" />
-                                </div>
-                            </div>
-                            <div>
-                                <div class="font-bold">Yancy Tear</div>
-                                <span class="badge badge-ghost badge-sm">🏆 Rank 1, Feb 2021 🏆</span>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        4328
-                        <br>
-                    </td>
-                    <td>$560.32</td>
-                    <th>
-                        <label for="modal-details" class="btn btn-ghost btn-xs">Modal details</label>
-                    </th>
-                </tr>
-            </tbody>
-
-        </table>
-    </div>
-
-    <input type="checkbox" id="modal-details" class="modal-toggle" />
-    <label for="modal-details" class="modal cursor-pointer">
-        <label class="modal-box relative" for="">
-            <div class="overflow-x-auto">
-                <table class="table w-full">
-                    <!-- head -->
-                    <thead>
-                        <tr>
-                            <th>Thing</th>
-                            <th>Amount</th>
-                            <th>Increase</th>
-                        </tr>
-                        <tr>
-                            <th>$ Saved</th>
-                            <th>$20</th>
-                            <th>↗︎ $3</th>
-                        </tr>
-                    </thead>
-                </table>
+    <div class="w-full overflow-x-auto rounded-xl bg-base-100 px-16 py-6 shadow-xl shadow-primary/30">
+        <div>
+            <div class="grid grid-cols-12 font-bold">
+                <div class="col-span-1">Rank</div>
+                <div class="col-span-5">Username</div>
+                <div class="col-span-2">Score</div>
+                <div class="col-span-4"></div>
             </div>
-        </label>
-    </label>
+
+            <div
+                class="mt-4 grid grid-cols-12"
+                v-for="entry in leaderboardArrRef"
+                :key="entry.id"
+            >
+                <div class="col-span-1 flex items-center">
+                    {{ entry.position }}
+                </div>
+                <div class="col-span-5">
+                    <div class="flex items-center space-x-3">
+                        <div class="mask mask-squircle h-12 w-12">
+                            <span
+                                v-html="
+                                    createAvatar(style, {
+                                        seed: entry.id,
+                                    })
+                                "
+                            ></span>
+                        </div>
+                        <div>
+                            <div class="font-bold">{{ entry.user }}</div>
+                            <span
+                                v-if="entry.position === 1"
+                                class="badge badge-ghost badge-sm"
+                            >
+                                🏅 Top 10, Aug 2022 🏅
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-2 flex items-center">
+                    {{ entry.computedScore }}
+                </div>
+                <div class="col-span-4 flex items-center">
+                    <div class="collapse">
+                        <input type="checkbox" />
+                        <div
+                            class="btn btn-ghost btn-xs collapse-title justify-start text-[#838383] underline"
+                        >
+                            more details
+                        </div>
+                        <div class="collapse-content">
+                            <div class="overflow-x-auto"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-const rank = ref(1);
-const incrementRank = () => {
-    rank.value++
-}
+import { createAvatar } from "@dicebear/avatars";
+import * as style from "@dicebear/open-peeps";
+import { onMounted, Ref, ref } from "vue";
+
+const leaderboardArr = [
+    {
+        id: "abple",
+        position: 1,
+        computedScore: 122,
+        leaderboard: "4321",
+        user: "syoongyman",
+    },
+    {
+        id: "pearby",
+        position: 2,
+        computedScore: 118.3,
+        leaderboard: "1325",
+        user: "BOPEH",
+    },
+    {
+        id: "j",
+        position: 3,
+        computedScore: 110.6,
+        leaderboard: "4735",
+        user: "somethingSimple",
+    },
+    {
+        id: "solgoddess",
+        position: 4,
+        computedScore: 109,
+        leaderboard: "7865",
+        user: "Solgod",
+    },
+    {
+        id: "yumyumbanana",
+        position: 5,
+        computedScore: 92.4,
+        leaderboard: "2345",
+        user: "nakirikai",
+    },
+    {
+        id: "nanoosnat",
+        position: 6,
+        computedScore: 85,
+        leaderboard: "3856",
+        user: "Choppy",
+    },
+    {
+        id: "noacl",
+        position: 7,
+        computedScore: 77.8,
+        leaderboard: "1634",
+        user: "selffallingflour",
+    },
+    {
+        id: "womanintech",
+        position: 8,
+        computedScore: 70.6,
+        leaderboard: "8265",
+        user: "ChewChewTrain",
+    },
+    {
+        id: "menintech",
+        position: 9,
+        computedScore: 35.6,
+        leaderboard: "9254",
+        user: "Veronica",
+    },
+    {
+        id: "iamnotstraight",
+        position: 10,
+        computedScore: 20,
+        leaderboard: "3853",
+        user: "chocobopi",
+    },
+];
+
+const leaderboardArrRef: Ref<any[]> = ref([]);
+
+onMounted(() => {
+    for (const entry of leaderboardArr) {
+        leaderboardArrRef.value.push(entry);
+    }
+});
 </script>
 
-
-<style scoped>
-/* .details {} */
-</style>
+<style scoped></style>

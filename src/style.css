@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.table tr.hover:hover td {
+    @apply bg-primary;
+}
+
+.table tr.hover:nth-child(even):hover td {
+    @apply bg-primary;
+}

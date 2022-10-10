@@ -56,14 +56,20 @@
                 </picture>
             </router-link>
         </div>
-        <div class="navbar-center hidden lg:flex">
+        <div class="navbar-end">
             <ul class="menu menu-horizontal p-0">
                 <li>
-                    <router-link to="/leaderboard">Leaderboard</router-link>
+                    <a>
+                        <router-link to="/leaderboard">
+                            Leaderboard
+                        </router-link>
+                    </a>
                 </li>
                 <li tabindex="0">
+                    <!-- the hover part idk why its not staying when i hover over it :sob: -->
+                    <!-- also the hover box goes under the artwork idk how to fix that will relook -->
                     <a>
-                        why this one bg transparent
+                        Hover Me
                         <svg
                             class="fill-current"
                             xmlns="http://www.w3.org/2000/svg"
@@ -76,15 +82,15 @@
                             />
                         </svg>
                     </a>
-                    <ul class="p-2">
+                    <ul
+                        class="dropdown-content menu rounded-box w-52 bg-base-100 p-2 shadow"
+                    >
                         <li><a>Du du du du</a></li>
                         <li><a>Dududu du</a></li>
                     </ul>
                 </li>
                 <li><a>About Us</a></li>
             </ul>
-        </div>
-        <div class="navbar-end">
             <button
                 class="btn btn-secondary"
                 @click="login"
