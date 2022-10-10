@@ -83,9 +83,9 @@
             </ul>
         </div>
         <div class="navbar-end">
-            <router-link to="/LogInPage"
-                ><a class="btn btn-secondary">Sign Up</a></router-link
-            >
+            <router-link to="/login">
+                <a class="btn btn-secondary">Sign Up</a>
+            </router-link>
         </div>
     </div>
 </template>
