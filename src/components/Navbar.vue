@@ -89,7 +89,7 @@
                         <li><a>Dududu du</a></li>
                     </ul>
                 </li>
-                <li><a>About Us</a></li>
+                <li><a @click="getUserDetails">About Us</a></li>
             </ul>
             <button
                 class="btn btn-secondary"
@@ -107,17 +107,41 @@
 
 <script setup lang="ts">
 import { useAuth0 } from "@auth0/auth0-vue";
+import { createUser, getUserByEmail } from "../composables/api/user";
 
-const { isAuthenticated, loginWithPopup, logout } = useAuth0();
+const { isAuthenticated, loginWithPopup, logout, user } = useAuth0();
 
 const login = async () => {
     try {
         await loginWithPopup();
+        if (user.value.email) {
+            const userRes = await getUserByEmail(user.value.email);
+            console.log(userRes);
+            if (userRes) {
+                //we just set the user data here
+            } else {
+                const res = await createUser(
+                    user.value.name || "TestUser",
+                    user.value.email,
+                    "Singapore",
+                    "BG",
+                    5,
+                );
+                console.log(res);
+            }
+        }
     } catch (error) {}
 };
+
 const onClickLogout = async () => {
     try {
         await logout();
+    } catch (error) {}
+};
+
+const getUserDetails = async () => {
+    try {
+        console.log(user.value);
     } catch (error) {}
 };
 </script>
