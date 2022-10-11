@@ -16,6 +16,11 @@ const routes: RouteRecordRaw[] = [
         component: () => import("./views/LoginPage.vue"),
     },
     {
+        path: "/create",
+        name: "Create Account",
+        component: () => import("./views/CreateAccountPage.vue"),
+    },
+    {
         path: "/:pathMatch(.*)*",
         name: "404",
         component: () => import("./views/NotFoundPage.vue"),
