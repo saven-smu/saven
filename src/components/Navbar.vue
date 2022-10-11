@@ -38,7 +38,7 @@
                         </svg>
                     </a>
                     <ul
-                        class="z-40 dropdown-content menu rounded-box w-52 bg-base-100 p-2 shadow"
+                        class="dropdown-content menu rounded-box z-40 w-52 bg-base-100 p-2 shadow"
                     >
                         <li><a>Du du du du</a></li>
                         <li><a>Dududu du</a></li>
@@ -63,26 +63,21 @@
 <script setup lang="ts">
 import { useAuth0 } from "@auth0/auth0-vue";
 import { createUser, getUserByEmail } from "../composables/api/user";
+import { useRouter } from "vue-router";
 
 const { isAuthenticated, loginWithPopup, logout, user } = useAuth0();
+const router = useRouter();
 
 const login = async () => {
     try {
         await loginWithPopup();
+        // On success, we want to push them to the create account page
         if (user.value.email) {
-            const userRes = await getUserByEmail(user.value.email);
-            console.log(userRes);
-            if (userRes) {
-                //we just set the user data here
+            const hasAccount = await getUserByEmail(user.value.email);
+            if (hasAccount) {
+                // Set the retrieved details here
             } else {
-                const res = await createUser(
-                    user.value.name || "TestUser",
-                    user.value.email,
-                    "Singapore",
-                    "BG",
-                    5,
-                );
-                console.log(res);
+                router.push("/create");
             }
         }
     } catch (error) {}
