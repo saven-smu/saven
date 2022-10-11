@@ -1,7 +1,7 @@
 <template>
     <div class="navbar bg-primary">
         <div class="navbar-start">
-            <router-link to="/" class="flex-1">
+            <router-link to="/">
                 <picture>
                     <source
                         srcset="../assets/saven_logo_56px.webp"
