@@ -47,13 +47,13 @@
                 <li><a @click="getUserDetails">About Us</a></li>
             </ul>
             <button
-                class="btn btn-secondary"
+                class="btn-secondary btn"
                 @click="login"
                 v-if="!isAuthenticated"
             >
                 Sign Up / Login
             </button>
-            <button class="btn btn-secondary" @click="onClickLogout" v-else>
+            <button class="btn-secondary btn" @click="onClickLogout" v-else>
                 Logout
             </button>
         </div>
@@ -62,20 +62,23 @@
 
 <script setup lang="ts">
 import { useAuth0 } from "@auth0/auth0-vue";
-import { createUser, getUserByEmail } from "../composables/api/user";
 import { useRouter } from "vue-router";
+import { useUserStore } from "../stores/user";
+import { createUser, getUserByEmail } from "../composables/api/user";
 
 const { isAuthenticated, loginWithPopup, logout, user } = useAuth0();
 const router = useRouter();
+const userStore = useUserStore();
 
 const login = async () => {
     try {
         await loginWithPopup();
         // On success, we want to push them to the create account page
         if (user.value.email) {
-            const hasAccount = await getUserByEmail(user.value.email);
-            if (hasAccount) {
+            const userDetails = await getUserByEmail(user.value.email);
+            if (userDetails) {
                 // Set the retrieved details here
+                userStore.setUser(userDetails);
             } else {
                 router.push("/create");
             }
