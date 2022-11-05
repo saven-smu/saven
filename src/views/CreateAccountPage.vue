@@ -16,7 +16,7 @@
                             v-model="name"
                             type="text"
                             placeholder="Name"
-                            class="input input-bordered w-full max-w-xs"
+                            class="input-bordered input w-full max-w-xs"
                             required
                         />
                     </div>
@@ -31,7 +31,7 @@
                             id="email"
                             type="email"
                             placeholder="Email"
-                            class="input input-bordered w-full max-w-xs"
+                            class="input-bordered input w-full max-w-xs"
                             disabled
                             required
                         />
@@ -48,7 +48,7 @@
                             id="address"
                             type="text"
                             placeholder="Address"
-                            class="input input-bordered w-full max-w-xs"
+                            class="input-bordered input w-full max-w-xs"
                             required
                         />
                     </div>
@@ -62,7 +62,7 @@
                         <select
                             id="housingType"
                             v-model="housingType"
-                            class="select select-bordered w-full max-w-xs"
+                            class="select-bordered select w-full max-w-xs"
                             required
                         >
                             <option value="HDB1">1-Room Flat(HDB)</option>
@@ -89,14 +89,14 @@
                             v-model="householdMembers"
                             type="number"
                             placeholder="No. of household members"
-                            class="input input-bordered w-full max-w-xs"
+                            class="input-bordered input w-full max-w-xs"
                             required
                         />
                     </div>
                 </div>
                 <button
                     type="submit"
-                    class="btn btn-primary btn-xl mt-2 w-full max-w-xs"
+                    class="btn-xl btn-primary btn mt-2 w-full max-w-xs"
                 >
                     Submit
                 </button>
