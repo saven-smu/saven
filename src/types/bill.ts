@@ -10,3 +10,13 @@ export type Bill = {
     storedDateTime: string;
     user: string;
 };
+
+export type BillChartData = {
+    bills: Bill[];
+    totalElectricityCost: number;
+    totalWaterCost: number;
+    totalGasCost: number;
+    totalElectricityUsed: number;
+    totalWaterUsed: number;
+    totalGasUsed: number;
+};
