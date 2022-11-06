@@ -1,6 +1,6 @@
 <template>
     <div class="bg-gradient-to-b from-primary to-white">
-        <div class="container mx-auto pt-8">{{ user }}</div>
+        <div class="container mx-auto pt-8"></div>
         <button class="btn-primary btn" @click="getBills">getBills</button>
     </div>
 </template>
@@ -9,33 +9,57 @@
 import { useUserStore } from "../stores/user";
 import { storeToRefs } from "pinia";
 import { getBillsByUserIDAndDays } from "../composables/api/bill";
-import { Bill } from "../types/bill";
+import { Bill, BillChartData } from "../types/bill";
 import { ref } from "vue";
 
 const { user } = storeToRefs(useUserStore());
-const bills = ref<Map<string, Bill[]>>(new Map());
+const bills = ref<Map<string, BillChartData>>(new Map());
 
 const getBills = async () => {
     if (user.value) {
         const res = await getBillsByUserIDAndDays(user.value.id, 7);
+        const tmpMap: Map<string, BillChartData> = new Map();
         if (res) {
             const formatter = new Intl.DateTimeFormat("en-SG");
             for (const bill of res) {
-                const billDate = new Date(bill.storedDateTime);
-                const date = formatter.format(billDate);
-                let dataToPush = bills.value.get(date);
+                const date = formatter.format(new Date(bill.storedDateTime));
+                let dataToPush = tmpMap.get(date);
                 if (dataToPush) {
-                    dataToPush.push(bill);
+                    dataToPush.bills.push(bill);
+                    dataToPush.totalElectricityCost += bill.electricityCost;
+                    dataToPush.totalWaterCost += bill.waterCost;
+                    dataToPush.totalGasCost += bill.gasCost;
+                    dataToPush.totalElectricityUsed += bill.electricityUsed;
+                    dataToPush.totalWaterUsed += bill.waterUsed;
+                    dataToPush.totalGasUsed += bill.gasUsed;
                 } else {
-                    dataToPush = [bill];
+                    dataToPush = <BillChartData>{
+                        bills: [bill],
+                        totalElectricityCost: bill.electricityCost,
+                        totalWaterCost: bill.waterCost,
+                        totalGasCost: bill.gasCost,
+                        totalElectricityUsed: bill.electricityUsed,
+                        totalWaterUsed: bill.waterUsed,
+                        totalGasUsed: bill.gasUsed,
+                    };
                 }
 
-                bills.value.set(date, dataToPush);
+                tmpMap.set(date, dataToPush);
             }
-            console.log(bills.value);
+            bills.value = new Map(
+                [...tmpMap.entries()].sort((entryA, entryB) => {
+                    return (
+                        new Date(entryA[0]).getTime() -
+                        new Date(entryB[0]).getTime()
+                    );
+                }),
+            );
+            console.log(bills)
         }
     }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>
