@@ -1,6 +1,6 @@
 <template>
     <div class="bg-gradient-to-b from-primary to-white">
-        <div class="container mx-auto grid gap-4 pt-8 md:grid-cols-2">
+        <div class="container mx-auto grid gap-4 px-12 pt-8 md:grid-cols-2">
             <UtilityChart
                 :utility-data-map="bills"
                 :utility-type="Utility.OVERALL"
@@ -8,6 +8,7 @@
             <UtilityChart
                 :utility-data-map="bills"
                 :utility-type="Utility.OVERALL"
+                is-cost
             />
             <UtilityChart
                 :utility-data-map="bills"
@@ -16,6 +17,7 @@
             <UtilityChart
                 :utility-data-map="bills"
                 :utility-type="Utility.ELECTRICITY"
+                is-cost
             />
             <UtilityChart
                 :utility-data-map="bills"
@@ -24,6 +26,7 @@
             <UtilityChart
                 :utility-data-map="bills"
                 :utility-type="Utility.WATER"
+                is-cost
             />
             <UtilityChart
                 :utility-data-map="bills"
@@ -32,6 +35,7 @@
             <UtilityChart
                 :utility-data-map="bills"
                 :utility-type="Utility.GAS"
+                is-cost
             />
         </div>
         <button class="btn-primary btn" @click="getBills">getBills</button>

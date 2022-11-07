@@ -1,18 +1,20 @@
 <template>
-    <div class="card bg-white p-8">
-        <div class="card-title">Electricity Cost</div>
+    <div class="card bg-base-100 p-8 shadow-md shadow-gray-500/20">
+        <div class="card-title">
+            {{ props.utilityType }} {{ props.isCost ? "Cost" : "Usage" }}
+        </div>
 
         <Line
             :chart-data="chartData"
             :chart-options="chartOptions"
-            class="card-body"
+            class="card-body relative"
         />
     </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from "@vue/reactivity";
-import { BillChartData } from "../types/bill";
+import { computed, Ref, ref } from "@vue/reactivity";
+import { Bill, BillChartData } from "../types/bill";
 import currency from "currency.js";
 import { Line } from "vue-chartjs";
 import { TChartData, TChartOptions } from "vue-chartjs/dist/types";
@@ -41,20 +43,61 @@ ChartJS.register(
 const props = defineProps<{
     utilityDataMap: Map<string, BillChartData>;
     utilityType: Utility;
+    isCost?: boolean;
 }>();
-const chartOptions: TChartOptions<"line"> = {
+const chartOptions: Ref<TChartOptions<"line">> = ref({
     responsive: true,
-};
+    aspectRatio: 3,
+});
 
 const chartData = computed(() => {
     const retData: TChartData<"line"> = {
         labels: [],
-        datasets: [{ label: `${props.utilityType} Cost`, data: [] }],
+        datasets: [
+            {
+                borderColor: "#FF9B66",
+                label: `${props.utilityType} ${
+                    props.isCost ? "Cost" : "Usage"
+                }`,
+                data: [],
+            },
+        ],
     };
 
+    // Set the line colour for the line chart
+    switch (props.utilityType) {
+        case Utility.ELECTRICITY:
+            retData.datasets[0].borderColor = "#FFEE93";
+            break;
+        case Utility.WATER:
+            retData.datasets[0].borderColor = "#A0CED9";
+            break;
+        case Utility.GAS:
+            retData.datasets[0].borderColor = "#68EC78";
+            break;
+        default:
+            break;
+    }
+
+    // Set the data for the line chart
     for (const [key, value] of props.utilityDataMap.entries()) {
         retData.labels?.push(key);
-        let valueToPush = 0;
+
+        // Choose which data based on the utility type passed in
+        retData.datasets[0].data.push(
+            currency(getDataValue(value), {
+                fromCents: true,
+                precision: 4,
+            }).value,
+        );
+    }
+
+    return retData;
+});
+
+const getDataValue = (value: BillChartData): number => {
+    let valueToPush = 0;
+    if (props.isCost) {
         switch (props.utilityType) {
             case Utility.ELECTRICITY:
                 valueToPush = value.totalElectricityCost;
@@ -68,22 +111,35 @@ const chartData = computed(() => {
             case Utility.OVERALL:
                 valueToPush =
                     value.totalElectricityCost +
-                    value.totalGasCost +
-                    value.totalWaterCost;
+                    value.totalWaterCost +
+                    value.totalGasCost;
                 break;
             default:
                 break;
         }
-        retData.datasets[0].data.push(
-            currency(valueToPush, {
-                fromCents: true,
-                precision: 4,
-            }).value,
-        );
+    } else {
+        switch (props.utilityType) {
+            case Utility.ELECTRICITY:
+                valueToPush = value.totalElectricityUsed;
+                break;
+            case Utility.WATER:
+                valueToPush = value.totalWaterUsed;
+                break;
+            case Utility.GAS:
+                valueToPush = value.totalGasUsed;
+                break;
+            case Utility.OVERALL:
+                valueToPush =
+                    value.totalElectricityUsed +
+                    value.totalWaterUsed +
+                    value.totalGasUsed;
+                break;
+            default:
+                break;
+        }
     }
-
-    return retData;
-});
+    return valueToPush;
+};
 </script>
 
 <style scoped></style>
