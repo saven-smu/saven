@@ -33,6 +33,7 @@ const createUser = async (
                     address,
                     housingType,
                     householdMembers,
+                    credits: 0
                 },
                 headers: { Authorization: `Bearer ${authToken}` },
             })
