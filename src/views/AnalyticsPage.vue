@@ -1,6 +1,39 @@
 <template>
     <div class="bg-gradient-to-b from-primary to-white">
-        <div class="container mx-auto pt-8"></div>
+        <div class="container mx-auto grid gap-4 pt-8 md:grid-cols-2">
+            <UtilityChart
+                :utility-data-map="bills"
+                :utility-type="Utility.OVERALL"
+            />
+            <UtilityChart
+                :utility-data-map="bills"
+                :utility-type="Utility.OVERALL"
+            />
+            <UtilityChart
+                :utility-data-map="bills"
+                :utility-type="Utility.ELECTRICITY"
+            />
+            <UtilityChart
+                :utility-data-map="bills"
+                :utility-type="Utility.ELECTRICITY"
+            />
+            <UtilityChart
+                :utility-data-map="bills"
+                :utility-type="Utility.WATER"
+            />
+            <UtilityChart
+                :utility-data-map="bills"
+                :utility-type="Utility.WATER"
+            />
+            <UtilityChart
+                :utility-data-map="bills"
+                :utility-type="Utility.GAS"
+            />
+            <UtilityChart
+                :utility-data-map="bills"
+                :utility-type="Utility.GAS"
+            />
+        </div>
         <button class="btn-primary btn" @click="getBills">getBills</button>
     </div>
 </template>
@@ -11,6 +44,8 @@ import { storeToRefs } from "pinia";
 import { getBillsByUserIDAndDays } from "../composables/api/bill";
 import { Bill, BillChartData } from "../types/bill";
 import { ref } from "vue";
+import UtilityChart from "../components/UtilityChart.vue";
+import { Utility } from "../types/utility";
 
 const { user } = storeToRefs(useUserStore());
 const bills = ref<Map<string, BillChartData>>(new Map());
@@ -54,12 +89,10 @@ const getBills = async () => {
                     );
                 }),
             );
-            console.log(bills)
+            console.log(bills);
         }
     }
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
