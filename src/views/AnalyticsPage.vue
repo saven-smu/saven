@@ -74,83 +74,52 @@ const getBills = async () => {
             7,
         );
 
-        const tmpMap: Map<string, BillChartData> = new Map();
-        const formatter = new Intl.DateTimeFormat("en-SG");
         if (res) {
-            for (const bill of res) {
-                const date = formatter.format(new Date(bill.storedDateTime));
-                let dataToPush = tmpMap.get(date);
-                if (dataToPush) {
-                    dataToPush.bills.push(bill);
-                    dataToPush.totalElectricityCost += bill.electricityCost;
-                    dataToPush.totalWaterCost += bill.waterCost;
-                    dataToPush.totalGasCost += bill.gasCost;
-                    dataToPush.totalElectricityUsed += bill.electricityUsed;
-                    dataToPush.totalWaterUsed += bill.waterUsed;
-                    dataToPush.totalGasUsed += bill.gasUsed;
-                } else {
-                    dataToPush = <BillChartData>{
-                        bills: [bill],
-                        totalElectricityCost: bill.electricityCost,
-                        totalWaterCost: bill.waterCost,
-                        totalGasCost: bill.gasCost,
-                        totalElectricityUsed: bill.electricityUsed,
-                        totalWaterUsed: bill.waterUsed,
-                        totalGasUsed: bill.gasUsed,
-                    };
-                }
-
-                tmpMap.set(date, dataToPush);
-            }
-            bills.value = new Map(
-                [...tmpMap.entries()].sort((entryA, entryB) => {
-                    return (
-                        new Date(entryA[0]).getTime() -
-                        new Date(entryB[0]).getTime()
-                    );
-                }),
-            );
-            tmpMap.clear();
+            bills.value = getComputedBillData(res);
         }
-
         if (avgUserRes) {
-            for (const bill of avgUserRes) {
-                const date = formatter.format(new Date(bill.storedDateTime));
-                let dataToPush = tmpMap.get(date);
-                if (dataToPush) {
-                    dataToPush.bills.push(bill);
-                    dataToPush.totalElectricityCost += bill.electricityCost;
-                    dataToPush.totalWaterCost += bill.waterCost;
-                    dataToPush.totalGasCost += bill.gasCost;
-                    dataToPush.totalElectricityUsed += bill.electricityUsed;
-                    dataToPush.totalWaterUsed += bill.waterUsed;
-                    dataToPush.totalGasUsed += bill.gasUsed;
-                } else {
-                    dataToPush = <BillChartData>{
-                        bills: [bill],
-                        totalElectricityCost: bill.electricityCost,
-                        totalWaterCost: bill.waterCost,
-                        totalGasCost: bill.gasCost,
-                        totalElectricityUsed: bill.electricityUsed,
-                        totalWaterUsed: bill.waterUsed,
-                        totalGasUsed: bill.gasUsed,
-                    };
-                }
+            avgBills.value = getComputedBillData(avgUserRes);
+        }
+    }
+};
 
-                tmpMap.set(date, dataToPush);
-            }
-            avgBills.value = new Map(
-                [...tmpMap.entries()].sort((entryA, entryB) => {
-                    return (
-                        new Date(entryA[0]).getTime() -
-                        new Date(entryB[0]).getTime()
-                    );
-                }),
-            );
+const getComputedBillData = (billData: Bill[]): Map<string, BillChartData> => {
+    const tmpMap: Map<string, BillChartData> = new Map();
+    const formatter = new Intl.DateTimeFormat("en-SG");
+
+    for (const bill of billData) {
+        const date = formatter.format(new Date(bill.storedDateTime));
+        let dataToPush = tmpMap.get(date);
+        if (dataToPush) {
+            dataToPush.bills.push(bill);
+            dataToPush.totalElectricityCost += bill.electricityCost;
+            dataToPush.totalWaterCost += bill.waterCost;
+            dataToPush.totalGasCost += bill.gasCost;
+            dataToPush.totalElectricityUsed += bill.electricityUsed;
+            dataToPush.totalWaterUsed += bill.waterUsed;
+            dataToPush.totalGasUsed += bill.gasUsed;
+        } else {
+            dataToPush = <BillChartData>{
+                bills: [bill],
+                totalElectricityCost: bill.electricityCost,
+                totalWaterCost: bill.waterCost,
+                totalGasCost: bill.gasCost,
+                totalElectricityUsed: bill.electricityUsed,
+                totalWaterUsed: bill.waterUsed,
+                totalGasUsed: bill.gasUsed,
+            };
         }
 
-        tmpMap.clear();
+        tmpMap.set(date, dataToPush);
     }
+
+    return new Map(
+        [...tmpMap.entries()].sort((entryA, entryB) => {
+            return (
+                new Date(entryA[0]).getTime() - new Date(entryB[0]).getTime()
+            );
+        }),
+    );
 };
 </script>
 

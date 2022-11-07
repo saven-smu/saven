@@ -109,7 +109,6 @@ const chartData = computed(() => {
             }).value,
         );
     }
-    retData.datasets[1].data.push(0);
 
     return retData;
 });
