@@ -1,50 +1,15 @@
 <template>
     <div class="bg-gradient-to-b from-primary to-white">
         <div class="container mx-auto grid gap-4 px-12 md:grid-cols-2">
-            <UtilityChart
-                :utility-data-map="bills"
-                :avg-data-map="avgBills"
-                :utility-type="Utility.OVERALL"
-            />
-            <UtilityChart
-                :utility-data-map="bills"
-                :avg-data-map="avgBills"
-                :utility-type="Utility.OVERALL"
-                is-cost
-            />
-            <UtilityChart
-                :utility-data-map="bills"
-                :avg-data-map="avgBills"
-                :utility-type="Utility.ELECTRICITY"
-            />
-            <UtilityChart
-                :utility-data-map="bills"
-                :avg-data-map="avgBills"
-                :utility-type="Utility.ELECTRICITY"
-                is-cost
-            />
-            <UtilityChart
-                :utility-data-map="bills"
-                :avg-data-map="avgBills"
-                :utility-type="Utility.WATER"
-            />
-            <UtilityChart
-                :utility-data-map="bills"
-                :avg-data-map="avgBills"
-                :utility-type="Utility.WATER"
-                is-cost
-            />
-            <UtilityChart
-                :utility-data-map="bills"
-                :avg-data-map="avgBills"
-                :utility-type="Utility.GAS"
-            />
-            <UtilityChart
-                :utility-data-map="bills"
-                :avg-data-map="avgBills"
-                :utility-type="Utility.GAS"
-                is-cost
-            />
+            <UtilityChart :utility-data-map="bills" :avg-data-map="avgBills" :utility-type="Utility.OVERALL" />
+            <UtilityChart :utility-data-map="bills" :avg-data-map="avgBills" :utility-type="Utility.OVERALL" is-cost />
+            <UtilityChart :utility-data-map="bills" :avg-data-map="avgBills" :utility-type="Utility.ELECTRICITY" />
+            <UtilityChart :utility-data-map="bills" :avg-data-map="avgBills" :utility-type="Utility.ELECTRICITY"
+                is-cost />
+            <UtilityChart :utility-data-map="bills" :avg-data-map="avgBills" :utility-type="Utility.WATER" />
+            <UtilityChart :utility-data-map="bills" :avg-data-map="avgBills" :utility-type="Utility.WATER" is-cost />
+            <UtilityChart :utility-data-map="bills" :avg-data-map="avgBills" :utility-type="Utility.GAS" />
+            <UtilityChart :utility-data-map="bills" :avg-data-map="avgBills" :utility-type="Utility.GAS" is-cost />
         </div>
     </div>
 </template>
@@ -120,6 +85,14 @@ const getBills = async () => {
                 currWeekGasUsed += value.gasUsed;
                 currWeekElectricityUsed += value.electricityUsed;
             }
+
+            costSavedWater.value = getDifference(currWeekWaterCost, prevWeekWaterCost);
+            costSavedElectricity.value = getDifference(currWeekElectricityCost, prevWeekElectricityCost);
+            costSavedGas.value = getDifference(currWeekGasCost, prevWeekGasCost);
+
+            amtSavedWater.value = getDifference(currWeekWaterUsed, prevWeekWaterUsed);
+            amtSavedElectricity.value = getDifference(currWeekElectricityUsed, prevWeekElectricityUsed);
+            amtSavedGas.value = getDifference(currWeekGasUsed, prevWeekGasUsed);
         }
         if (avgUserRes) {
             avgBills.value = getComputedBillData(avgUserRes);
@@ -165,6 +138,10 @@ const getComputedBillData = (billData: Bill[]): Map<string, BillChartData> => {
         }),
     );
 };
+
+const getDifference = (curr: number, prev: number) => (curr - prev) / ((curr + prev) / 2) * 100
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>
