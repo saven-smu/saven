@@ -11,7 +11,7 @@
                 :class="{ 'overflow-y-scroll': isPrivatePages }"
             />
         </div>
-        <!-- <Footer /> -->
+        <!-- <Footer></Footer> -->
     </main>
 </template>
 
