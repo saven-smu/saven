@@ -1,6 +1,6 @@
 <template>
     <div class="bg-gradient-to-b from-primary to-white">
-        <div class="container mx-auto grid gap-4 px-12 pt-8 md:grid-cols-2">
+        <div class="container mx-auto grid gap-4 px-12 md:grid-cols-2">
             <UtilityChart
                 :utility-data-map="bills"
                 :utility-type="Utility.OVERALL"

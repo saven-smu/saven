@@ -1,6 +1,5 @@
 <template>
-    <div class="bg-gradient-to-b from-primary to-white">
-        <div class="container mx-auto pt-8">
+        <div class="container mx-auto">
             <picture>
                 <!-- <source
                     srcset="../assets/saven_404.pn"
@@ -13,7 +12,6 @@
                 />
             </picture>
         </div>
-    </div>
 </template>
 
 <script setup lang="ts">
