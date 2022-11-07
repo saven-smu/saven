@@ -38,7 +38,6 @@
                 is-cost
             />
         </div>
-        <button class="btn-primary btn" @click="getBills">getBills</button>
     </div>
 </template>
 
@@ -47,12 +46,16 @@ import { useUserStore } from "../stores/user";
 import { storeToRefs } from "pinia";
 import { getBillsByUserIDAndDays } from "../composables/api/bill";
 import { Bill, BillChartData } from "../types/bill";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import UtilityChart from "../components/UtilityChart.vue";
 import { Utility } from "../types/utility";
 
 const { user } = storeToRefs(useUserStore());
 const bills = ref<Map<string, BillChartData>>(new Map());
+
+onMounted(async () => {
+    getBills();
+});
 
 const getBills = async () => {
     if (user.value) {
@@ -93,7 +96,6 @@ const getBills = async () => {
                     );
                 }),
             );
-            console.log(bills);
         }
     }
 };
