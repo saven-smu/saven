@@ -5,67 +5,88 @@
         </p>
         <div class="col-span-full flex justify-evenly">
             <DifferenceBox
+                v-motion-pop
                 title="Electricity"
                 :percentage-val="costSavedElectricity"
                 is-cost
             />
             <DifferenceBox
+                v-motion-pop
                 title="Water"
                 :percentage-val="costSavedWater"
                 is-cost
             />
-            <DifferenceBox title="Gas" :percentage-val="costSavedGas" is-cost />
             <DifferenceBox
+                v-motion-pop
+                title="Gas"
+                :percentage-val="costSavedGas"
+                is-cost
+            />
+            <DifferenceBox
+                v-motion-pop
                 title="Electricity"
                 :percentage-val="amtSavedElectricity"
             />
-            <DifferenceBox title="Water" :percentage-val="amtSavedWater" />
-            <DifferenceBox title="Gas" :percentage-val="amtSavedGas" />
+            <DifferenceBox
+                v-motion-pop
+                title="Water"
+                :percentage-val="amtSavedWater"
+            />
+            <DifferenceBox
+                v-motion-pop
+                title="Gas"
+                :percentage-val="amtSavedGas"
+            />
         </div>
 
-
-        <p class="col-span-full my-8 text-6xl">
-            Your charts
-        </p>
+        <p class="col-span-full my-8 text-6xl">Your charts</p>
         <UtilityChart
+            v-motion-slide-top
             :utility-data-map="bills"
             :avg-data-map="avgBills"
             :utility-type="Utility.OVERALL"
         />
         <UtilityChart
+            v-motion-slide-top
             :utility-data-map="bills"
             :avg-data-map="avgBills"
             :utility-type="Utility.OVERALL"
             is-cost
         />
         <UtilityChart
+            v-motion-slide-top
             :utility-data-map="bills"
             :avg-data-map="avgBills"
             :utility-type="Utility.ELECTRICITY"
         />
         <UtilityChart
+            v-motion-slide-top
             :utility-data-map="bills"
             :avg-data-map="avgBills"
             :utility-type="Utility.ELECTRICITY"
             is-cost
         />
         <UtilityChart
+            v-motion-slide-visible-once-top
             :utility-data-map="bills"
             :avg-data-map="avgBills"
             :utility-type="Utility.WATER"
         />
         <UtilityChart
+            v-motion-slide-visible-once-top
             :utility-data-map="bills"
             :avg-data-map="avgBills"
             :utility-type="Utility.WATER"
             is-cost
         />
         <UtilityChart
+            v-motion-slide-visible-once-top
             :utility-data-map="bills"
             :avg-data-map="avgBills"
             :utility-type="Utility.GAS"
         />
         <UtilityChart
+            v-motion-slide-visible-once-top
             :utility-data-map="bills"
             :avg-data-map="avgBills"
             :utility-type="Utility.GAS"
