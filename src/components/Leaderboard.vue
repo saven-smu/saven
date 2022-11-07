@@ -28,7 +28,7 @@
                             ></span>
                         </div>
                         <div>
-                            <div class="font-bold">{{ entry.user }}</div>
+                            <div class="font-bold">{{ entry.id }}</div>
                             <span
                                 v-if="entry.position === 1"
                                 class="badge badge-ghost badge-sm"
@@ -63,87 +63,32 @@
 import { createAvatar } from "@dicebear/avatars";
 import * as style from "@dicebear/open-peeps";
 import { onMounted, Ref, ref } from "vue";
-
-const leaderboardArr = [
-    {
-        id: "abple",
-        position: 1,
-        computedScore: 122,
-        leaderboard: "4321",
-        user: "syoongyman",
-    },
-    {
-        id: "pearby",
-        position: 2,
-        computedScore: 118.3,
-        leaderboard: "1325",
-        user: "BOPEH",
-    },
-    {
-        id: "j",
-        position: 3,
-        computedScore: 110.6,
-        leaderboard: "4735",
-        user: "somethingSimple",
-    },
-    {
-        id: "solgoddess",
-        position: 4,
-        computedScore: 109,
-        leaderboard: "7865",
-        user: "Solgod",
-    },
-    {
-        id: "yumyumbanana",
-        position: 5,
-        computedScore: 92.4,
-        leaderboard: "2345",
-        user: "nakirikai",
-    },
-    {
-        id: "nanoosnat",
-        position: 6,
-        computedScore: 85,
-        leaderboard: "3856",
-        user: "Choppy",
-    },
-    {
-        id: "noacl",
-        position: 7,
-        computedScore: 77.8,
-        leaderboard: "1634",
-        user: "selffallingflour",
-    },
-    {
-        id: "womanintech",
-        position: 8,
-        computedScore: 70.6,
-        leaderboard: "8265",
-        user: "ChewChewTrain",
-    },
-    {
-        id: "menintech",
-        position: 9,
-        computedScore: 35.6,
-        leaderboard: "9254",
-        user: "Veronica",
-    },
-    {
-        id: "iamnotstraight",
-        position: 10,
-        computedScore: 20,
-        leaderboard: "3853",
-        user: "chocobopi",
-    },
-];
+import { getUserLeaderboard } from "../composables/api/userLeaderboard";
+import { userLeaderboard } from "../types/userleaderboard";
+import { getUserById } from "../composables/api/user";
 
 const leaderboardArrRef: Ref<any[]> = ref([]);
 
-onMounted(() => {
-    for (const entry of leaderboardArr) {
-        leaderboardArrRef.value.push(entry);
+onMounted(async () => {
+    const res = await getUserLeaderboard();
+    if (res){
+        const all = res.filter(obj => obj.leaderboard === 'ceea60a9-aa72-4e26-9c7d-7d51ffb7faf0');
+        const sortAll = all.sort(
+        (firstObject: userLeaderboard, secondObject: userLeaderboard) =>
+            (firstObject.position > secondObject.position) ? 1 : -1
+    );
+    for (const entry of sortAll) {
+            entry.id = await getUserName(entry.user);
+            leaderboardArrRef.value.push(entry);
+        }
     }
 });
+
+const getUserName = async (id: string) =>{
+    const res = await getUserById(id);
+    const name = res?.name || "" ;
+    return name;
+}
 </script>
 
 <style scoped></style>
