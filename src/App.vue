@@ -6,7 +6,10 @@
             :class="containerClass"
         >
             <SideDrawer v-if="isPrivatePages" />
-            <router-view class="max-h-full w-2/3 flex-grow overflow-y-auto" />
+            <router-view
+                class="max-h-full w-2/3 flex-grow"
+                :class="{ 'overflow-y-scroll': isPrivatePages }"
+            />
         </div>
     </main>
 </template>
@@ -26,7 +29,7 @@ const containerClass = computed(() => {
     if (isPrivatePages) {
         retObj = {
             flex: true,
-            "max-h-[800]": true,
+            "max-h-[800px]": true,
         };
     }
     return retObj;

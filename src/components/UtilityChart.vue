@@ -1,5 +1,5 @@
 <template>
-    <div class="card bg-base-100 p-8 shadow-md shadow-gray-500/20">
+    <div class="card bg-base-100 p-4 shadow-md shadow-gray-500/20">
         <div class="card-title">
             {{ props.utilityType }} {{ props.isCost ? "Cost" : "Usage" }}
         </div>
@@ -7,7 +7,7 @@
         <Line
             :chart-data="chartData"
             :chart-options="chartOptions"
-            class="card-body relative"
+            class="card-body"
         />
     </div>
 </template>
@@ -42,12 +42,13 @@ ChartJS.register(
 
 const props = defineProps<{
     utilityDataMap: Map<string, BillChartData>;
+    avgDataMap: Map<string, BillChartData>;
     utilityType: Utility;
     isCost?: boolean;
 }>();
 const chartOptions: Ref<TChartOptions<"line">> = ref({
     responsive: true,
-    aspectRatio: 3,
+    aspectRatio: 2,
 });
 
 const chartData = computed(() => {
@@ -59,6 +60,11 @@ const chartData = computed(() => {
                 label: `${props.utilityType} ${
                     props.isCost ? "Cost" : "Usage"
                 }`,
+                data: [],
+            },
+            {
+                borderColor: "#000000",
+                label: `Average`,
                 data: [],
             },
         ],
@@ -91,6 +97,19 @@ const chartData = computed(() => {
             }).value,
         );
     }
+
+    // Set the average data for the line chart
+    for (const [key, value] of props.avgDataMap.entries()) {
+
+        // Choose which data based on the utility type passed in
+        retData.datasets[1].data.push(
+            currency(getDataValue(value), {
+                fromCents: true,
+                precision: 4,
+            }).value,
+        );
+    }
+    retData.datasets[1].data.push(0);
 
     return retData;
 });
