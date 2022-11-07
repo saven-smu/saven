@@ -2,7 +2,7 @@
     <main>
         <Navbar />
         <div
-            class="w-full bg-gradient-to-b from-primary to-white"
+            class="w-full bg-gradient-to-b from-primary to-[#FFFFF9]"
             :class="containerClass"
         >
             <SideDrawer v-if="isPrivatePages" />
@@ -11,6 +11,7 @@
                 :class="{ 'overflow-y-scroll': isPrivatePages }"
             />
         </div>
+        <!-- <Footer /> -->
     </main>
 </template>
 
@@ -19,6 +20,7 @@ import { computed } from "@vue/reactivity";
 import { ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import Navbar from "./components/Navbar.vue";
+// import Footer from "./components/Footer.vue"
 import SideDrawer from "./components/SideDrawer.vue";
 
 const isPrivatePages = ref(false);

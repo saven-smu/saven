@@ -44,7 +44,13 @@
                         <li><a>Dududu du</a></li>
                     </ul>
                 </li>
-                <li><a @click="getUserDetails">About Us</a></li>
+                <li>
+                    <a @click="getUserDetails">
+                        <router-link to="/aboutus"> 
+                            About Us 
+                        </router-link> 
+                    </a>
+                </li>
             </ul>
             <button
                 class="btn-secondary btn"
