@@ -1,16 +1,76 @@
 <template>
-    <div class="bg-gradient-to-b from-primary to-white">
-        <div class="container mx-auto grid gap-4 px-12 md:grid-cols-2">
-            <UtilityChart :utility-data-map="bills" :avg-data-map="avgBills" :utility-type="Utility.OVERALL" />
-            <UtilityChart :utility-data-map="bills" :avg-data-map="avgBills" :utility-type="Utility.OVERALL" is-cost />
-            <UtilityChart :utility-data-map="bills" :avg-data-map="avgBills" :utility-type="Utility.ELECTRICITY" />
-            <UtilityChart :utility-data-map="bills" :avg-data-map="avgBills" :utility-type="Utility.ELECTRICITY"
-                is-cost />
-            <UtilityChart :utility-data-map="bills" :avg-data-map="avgBills" :utility-type="Utility.WATER" />
-            <UtilityChart :utility-data-map="bills" :avg-data-map="avgBills" :utility-type="Utility.WATER" is-cost />
-            <UtilityChart :utility-data-map="bills" :avg-data-map="avgBills" :utility-type="Utility.GAS" />
-            <UtilityChart :utility-data-map="bills" :avg-data-map="avgBills" :utility-type="Utility.GAS" is-cost />
+    <div class="container mx-auto grid gap-4 p-4 px-12 md:grid-cols-2">
+        <p class="col-span-full mb-8 text-6xl">
+            Compared to the previous 7 days, you saw...
+        </p>
+        <div class="col-span-full flex justify-evenly">
+            <DifferenceBox
+                title="Electricity"
+                :percentage-val="costSavedElectricity"
+                is-cost
+            />
+            <DifferenceBox
+                title="Water"
+                :percentage-val="costSavedWater"
+                is-cost
+            />
+            <DifferenceBox title="Gas" :percentage-val="costSavedGas" is-cost />
+            <DifferenceBox
+                title="Electricity"
+                :percentage-val="amtSavedElectricity"
+            />
+            <DifferenceBox title="Water" :percentage-val="amtSavedWater" />
+            <DifferenceBox title="Gas" :percentage-val="amtSavedGas" />
         </div>
+
+
+        <p class="col-span-full my-8 text-6xl">
+            Your charts
+        </p>
+        <UtilityChart
+            :utility-data-map="bills"
+            :avg-data-map="avgBills"
+            :utility-type="Utility.OVERALL"
+        />
+        <UtilityChart
+            :utility-data-map="bills"
+            :avg-data-map="avgBills"
+            :utility-type="Utility.OVERALL"
+            is-cost
+        />
+        <UtilityChart
+            :utility-data-map="bills"
+            :avg-data-map="avgBills"
+            :utility-type="Utility.ELECTRICITY"
+        />
+        <UtilityChart
+            :utility-data-map="bills"
+            :avg-data-map="avgBills"
+            :utility-type="Utility.ELECTRICITY"
+            is-cost
+        />
+        <UtilityChart
+            :utility-data-map="bills"
+            :avg-data-map="avgBills"
+            :utility-type="Utility.WATER"
+        />
+        <UtilityChart
+            :utility-data-map="bills"
+            :avg-data-map="avgBills"
+            :utility-type="Utility.WATER"
+            is-cost
+        />
+        <UtilityChart
+            :utility-data-map="bills"
+            :avg-data-map="avgBills"
+            :utility-type="Utility.GAS"
+        />
+        <UtilityChart
+            :utility-data-map="bills"
+            :avg-data-map="avgBills"
+            :utility-type="Utility.GAS"
+            is-cost
+        />
     </div>
 </template>
 
@@ -22,6 +82,7 @@ import { Bill, BillChartData } from "../types/bill";
 import { onMounted, ref } from "vue";
 import UtilityChart from "../components/UtilityChart.vue";
 import { Utility } from "../types/utility";
+import DifferenceBox from "../components/DifferenceBox.vue";
 
 const { user } = storeToRefs(useUserStore());
 const bills = ref<Map<string, BillChartData>>(new Map());
@@ -86,12 +147,27 @@ const getBills = async () => {
                 currWeekElectricityUsed += value.electricityUsed;
             }
 
-            costSavedWater.value = getDifference(currWeekWaterCost, prevWeekWaterCost);
-            costSavedElectricity.value = getDifference(currWeekElectricityCost, prevWeekElectricityCost);
-            costSavedGas.value = getDifference(currWeekGasCost, prevWeekGasCost);
+            costSavedWater.value = getDifference(
+                currWeekWaterCost,
+                prevWeekWaterCost,
+            );
+            costSavedElectricity.value = getDifference(
+                currWeekElectricityCost,
+                prevWeekElectricityCost,
+            );
+            costSavedGas.value = getDifference(
+                currWeekGasCost,
+                prevWeekGasCost,
+            );
 
-            amtSavedWater.value = getDifference(currWeekWaterUsed, prevWeekWaterUsed);
-            amtSavedElectricity.value = getDifference(currWeekElectricityUsed, prevWeekElectricityUsed);
+            amtSavedWater.value = getDifference(
+                currWeekWaterUsed,
+                prevWeekWaterUsed,
+            );
+            amtSavedElectricity.value = getDifference(
+                currWeekElectricityUsed,
+                prevWeekElectricityUsed,
+            );
             amtSavedGas.value = getDifference(currWeekGasUsed, prevWeekGasUsed);
         }
         if (avgUserRes) {
@@ -139,9 +215,8 @@ const getComputedBillData = (billData: Bill[]): Map<string, BillChartData> => {
     );
 };
 
-const getDifference = (curr: number, prev: number) => (curr - prev) / ((curr + prev) / 2) * 100
+const getDifference = (curr: number, prev: number) =>
+    ((curr - prev) / ((curr + prev) / 2)) * 100;
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
