@@ -1,8 +1,6 @@
 <template>
-    <div class="bg-gradient-to-b from-primary to-white">
-        <div class="container mx-auto pt-8">
-            <Leaderboard v-motion-slide-top />
-        </div>
+    <div class="container mx-auto">
+        <Leaderboard v-motion-slide-top />
     </div>
 </template>
 

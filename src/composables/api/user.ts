@@ -1,5 +1,6 @@
 import ky, { HTTPError } from "ky";
 import auth from "../../auth";
+import { User } from "../../types/user";
 
 const apiURL = import.meta.env.VITE_API_URL;
 
@@ -9,7 +10,7 @@ const getUserByEmail = async (email: string) => {
         const res = await ky(`${apiURL}/api/users/verifyUser/${email}`, {
             headers: { Authorization: `Bearer ${authToken}` },
         }).json();
-        return res as any;
+        return res as User;
     } catch (error) {
         console.log(error);
     }

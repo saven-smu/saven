@@ -1,5 +1,5 @@
 <template>
-    <div class="hero bg-gradient-to-b from-primary to-white">
+    <div class="hero">
         <div class="hero-content flex-col lg:flex-row-reverse">
             <img
                 src="../assets/saven_landing.png"

@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import { authGuard } from "@auth0/auth0-vue";
 const routes: RouteRecordRaw[] = [
     {
         path: "/",
@@ -11,10 +12,16 @@ const routes: RouteRecordRaw[] = [
         component: () => import("./views/LeaderboardPage.vue"),
     },
     {
-        path: "/login",
-        name: "Login",
-        component: () => import("./views/LoginPage.vue"),
+        path: "/analytics",
+        name: "Analytics",
+        component: () => import("./views/AnalyticsPage.vue"),
+        beforeEnter: authGuard,
     },
+    // {
+    //     path: "/login",
+    //     name: "Login",
+    //     component: () => import("./views/LoginPage.vue"),
+    // },
     {
         path: "/create",
         name: "Create Account",
