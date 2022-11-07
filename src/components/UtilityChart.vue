@@ -1,6 +1,6 @@
 <template>
     <div class="card bg-base-100 p-4 shadow-md shadow-gray-500/20">
-        <div class="card-title">
+        <div class="card-title prose prose-lg">
             {{ props.utilityType }} {{ props.isCost ? "Cost" : "Usage" }}
         </div>
 
