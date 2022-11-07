@@ -61,6 +61,12 @@ import { Utility } from "../types/utility";
 const { user } = storeToRefs(useUserStore());
 const bills = ref<Map<string, BillChartData>>(new Map());
 const avgBills = ref<Map<string, BillChartData>>(new Map());
+const costSavedWater = ref(0),
+    costSavedElectricity = ref(0),
+    costSavedGas = ref(0);
+const amtSavedWater = ref(0),
+    amtSavedElectricity = ref(0),
+    amtSavedGas = ref(0);
 
 onMounted(() => {
     getBills();
@@ -68,7 +74,7 @@ onMounted(() => {
 
 const getBills = async () => {
     if (user.value) {
-        const res = await getBillsByUserIDAndDays(user.value.id, 7);
+        const res = await getBillsByUserIDAndDays(user.value.id, 14);
         const avgUserRes = await getBillsByUserIDAndDays(
             import.meta.env.VITE_AVG_USER,
             7,
@@ -76,6 +82,44 @@ const getBills = async () => {
 
         if (res) {
             bills.value = getComputedBillData(res);
+
+            // We also want to find the amount saved
+            const prevDataArr = [...res.entries()].slice(6);
+            const currDataArr = [...res.entries()].slice(7, res.length);
+
+            let prevWeekWaterCost = 0,
+                prevWeekGasCost = 0,
+                prevWeekElectricityCost = 0;
+
+            let prevWeekWaterUsed = 0,
+                prevWeekGasUsed = 0,
+                prevWeekElectricityUsed = 0;
+
+            for (const [key, value] of prevDataArr) {
+                prevWeekWaterCost += value.waterCost;
+                prevWeekGasCost += value.gasCost;
+                prevWeekElectricityCost += value.electricityCost;
+                prevWeekWaterUsed += value.waterUsed;
+                prevWeekGasUsed += value.gasUsed;
+                prevWeekElectricityUsed += value.electricityUsed;
+            }
+
+            let currWeekWaterCost = 0,
+                currWeekGasCost = 0,
+                currWeekElectricityCost = 0;
+
+            let currWeekWaterUsed = 0,
+                currWeekGasUsed = 0,
+                currWeekElectricityUsed = 0;
+
+            for (const [key, value] of currDataArr) {
+                currWeekWaterCost += value.waterCost;
+                currWeekGasCost += value.gasCost;
+                currWeekElectricityCost += value.electricityCost;
+                currWeekWaterUsed += value.waterUsed;
+                currWeekGasUsed += value.gasUsed;
+                currWeekElectricityUsed += value.electricityUsed;
+            }
         }
         if (avgUserRes) {
             avgBills.value = getComputedBillData(avgUserRes);

@@ -1,6 +1,6 @@
 <template>
     <div class="card bg-base-100 p-4 shadow-md shadow-gray-500/20">
-        <div class="card-title prose prose-lg">
+        <div class="prose-lg prose card-title">
             {{ props.utilityType }} {{ props.isCost ? "Cost" : "Usage" }}
         </div>
 
@@ -85,8 +85,13 @@ const chartData = computed(() => {
             break;
     }
 
+    const utilityDataMapArr = [...props.utilityDataMap.entries()];
+
     // Set the data for the line chart
-    for (const [key, value] of props.utilityDataMap.entries()) {
+    for (const [key, value] of utilityDataMapArr.slice(
+        7,
+        utilityDataMapArr.length,
+    )) {
         retData.labels?.push(key);
 
         // Choose which data based on the utility type passed in
@@ -100,7 +105,6 @@ const chartData = computed(() => {
 
     // Set the average data for the line chart
     for (const [key, value] of props.avgDataMap.entries()) {
-
         // Choose which data based on the utility type passed in
         retData.datasets[1].data.push(
             currency(getDataValue(value), {
