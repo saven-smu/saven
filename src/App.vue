@@ -2,7 +2,7 @@
     <main>
         <Navbar />
         <div
-            class="w-full bg-gradient-to-b from-primary to-white flex"
+            class="flex w-full bg-gradient-to-b from-primary to-white"
             :class="containerClass"
         >
             <SideDrawer v-if="isPrivatePages" />
@@ -11,6 +11,8 @@
                 :class="{ 'overflow-y-scroll': isPrivatePages }"
             />
         </div>
+
+        <Toast />
     </main>
 </template>
 
@@ -20,6 +22,7 @@ import { ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import Navbar from "./components/Navbar.vue";
 import SideDrawer from "./components/SideDrawer.vue";
+import Toast from "./components/Toast.vue";
 
 const isPrivatePages = ref(false);
 const route = useRoute();

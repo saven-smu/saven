@@ -1,6 +1,7 @@
 import ky, { HTTPError } from "ky";
 import auth from "../../auth";
 import { User } from "../../types/user";
+import { addToastToQueue } from "../ToastHandler";
 
 const apiURL = import.meta.env.VITE_API_URL;
 
@@ -33,13 +34,16 @@ const createUser = async (
                     address,
                     housingType,
                     householdMembers,
-                    credits: 0
+                    credits: 0,
                 },
                 headers: { Authorization: `Bearer ${authToken}` },
             })
             .json();
+        addToastToQueue("success", "Created user!");
         return res as any;
-    } catch (error) {}
+    } catch (error) {
+        addToastToQueue("error", "Error creating user");
+    }
 };
 
 const getUserById = async (id: string) => {
@@ -48,9 +52,9 @@ const getUserById = async (id: string) => {
         const res = await ky(`${apiURL}/api/users/${id}`, {
             headers: { Authorization: `Bearer ${authToken}` },
         }).json();
-      return res as User;
+        return res as User;
     } catch (error) {
-        console.log(error);
+        addToastToQueue("error", "Error getting user by ID");
     }
 };
 
@@ -61,7 +65,7 @@ const updateUserById = async (
     address: string,
     housingType: string,
     householdMembers: number,
-    credits: number
+    credits: number,
 ) => {
     try {
         const authToken = await auth.getAccessTokenSilently();
@@ -73,13 +77,16 @@ const updateUserById = async (
                     address,
                     housingType,
                     householdMembers,
-                    credits
+                    credits,
                 },
                 headers: { Authorization: `Bearer ${authToken}` },
             })
             .json();
+        addToastToQueue("success", "Updated user!");
         return res as any;
-    } catch (error) {}
+    } catch (error) {
+        addToastToQueue("error", "Error updating user");
+    }
 };
 
 export { getUserByEmail, createUser, getUserById, updateUserById };
