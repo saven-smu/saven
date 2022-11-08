@@ -35,7 +35,7 @@
                                 v-if="entry.position === 1"
                                 class="badge-ghost badge badge-sm"
                             >
-                                🏅 Top 10, Aug 2022 🏅
+                                🏅 First, {{ leaderboardDate }} 🏅
                             </span>
                         </div>
                     </div>
@@ -68,6 +68,7 @@ import { UserLeaderboard } from "../types/userLeaderboard";
 
 const props = defineProps<{
     leaderboard: UserLeaderboard[];
+    leaderboardDate: string;
 }>();
 </script>
 
