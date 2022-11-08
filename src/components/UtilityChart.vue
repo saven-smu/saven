@@ -95,23 +95,13 @@ const chartData = computed(() => {
         retData.labels?.push(key);
 
         // Choose which data based on the utility type passed in
-        retData.datasets[0].data.push(
-            currency(getDataValue(value), {
-                fromCents: true,
-                precision: 4,
-            }).value,
-        );
+        retData.datasets[0].data.push(getDataValue(value));
     }
 
     // Set the average data for the line chart
     for (const [key, value] of props.avgDataMap.entries()) {
         // Choose which data based on the utility type passed in
-        retData.datasets[1].data.push(
-            currency(getDataValue(value), {
-                fromCents: true,
-                precision: 4,
-            }).value,
-        );
+        retData.datasets[1].data.push(getDataValue(value));
     }
 
     return retData;
@@ -119,6 +109,7 @@ const chartData = computed(() => {
 
 const getDataValue = (value: BillChartData): number => {
     let valueToPush = 0;
+    let precision = 4;
     if (props.isCost) {
         switch (props.utilityType) {
             case Utility.ELECTRICITY:
@@ -143,24 +134,32 @@ const getDataValue = (value: BillChartData): number => {
         switch (props.utilityType) {
             case Utility.ELECTRICITY:
                 valueToPush = value.totalElectricityUsed;
+                precision = 3;
                 break;
             case Utility.WATER:
                 valueToPush = value.totalWaterUsed;
+                precision = 6;
                 break;
             case Utility.GAS:
                 valueToPush = value.totalGasUsed;
+                precision = 3;
                 break;
             case Utility.OVERALL:
                 valueToPush =
-                    value.totalElectricityUsed +
-                    value.totalWaterUsed +
-                    value.totalGasUsed;
+                    value.totalElectricityUsed / 1000 +
+                    value.totalWaterUsed / 1000000 +
+                    value.totalGasUsed / 1000;
+                precision = 0;
                 break;
             default:
                 break;
         }
     }
-    return valueToPush;
+
+    return currency(valueToPush, {
+        fromCents: true,
+        precision: precision,
+    }).value;
 };
 </script>
 
