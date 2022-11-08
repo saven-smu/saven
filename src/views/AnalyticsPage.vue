@@ -1,5 +1,5 @@
 <template>
-    <div class="container mx-auto grid gap-4 p-4 px-12 md:grid-cols-2">
+    <div class="container mx-auto grid gap-4 p-4 px-12 md:grid-cols-2 overflow-y-scroll">
         <p class="col-span-full mb-8 text-6xl">Today you have used</p>
         <div class="col-span-full flex justify-evenly">
             <DailyUtilityChart :bills="dailyBills" />

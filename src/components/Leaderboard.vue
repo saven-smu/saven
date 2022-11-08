@@ -21,13 +21,7 @@
                 <div class="col-span-5">
                     <div class="flex items-center space-x-3">
                         <div class="mask mask-squircle h-12 w-12">
-                            <span
-                                v-html="
-                                    createAvatar(style, {
-                                        seed: entry.id,
-                                    })
-                                "
-                            ></span>
+                            <span v-html="getAvatar(entry.id)"></span>
                         </div>
                         <div>
                             <div class="font-bold">{{ entry.id }}</div>
@@ -62,8 +56,7 @@
 </template>
 
 <script setup lang="ts">
-import { createAvatar } from "@dicebear/avatars";
-import * as style from "@dicebear/open-peeps";
+import getAvatar from "../composables/AvatarGenerator";
 import { UserLeaderboard } from "../types/userLeaderboard";
 
 const props = defineProps<{

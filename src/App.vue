@@ -6,10 +6,7 @@
             :class="containerClass"
         >
             <SideDrawer v-if="isPrivatePages" />
-            <router-view
-                class="max-h-full w-2/3 flex-grow"
-                :class="{ 'overflow-y-scroll': isPrivatePages }"
-            />
+            <router-view class="max-h-full w-2/3 flex-grow" />
         </div>
 
         <Toast />
@@ -44,7 +41,7 @@ watch(
         if (
             newRouteName &&
             (newRouteName.toString() === "Analytics" ||
-                newRouteName.toString() === "Settings")
+                newRouteName.toString() === "Edit Account")
         )
             isPrivatePages.value = true;
         else isPrivatePages.value = false;
