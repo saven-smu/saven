@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-gradient-to-b from-primary to-[#FFFFF9] flex flex-col">
+    <div class="flex flex-col">
         <div class="drop-shadow-lg pt-5 px-20" ref="carouselRef">
             <div class="carousel w-full">
                 <div id="item1" class="carousel-item w-full">

@@ -1,6 +1,5 @@
 <template>
-    <body class="flex flex-col min-h-screen">
-        <footer class="mt-auto footer p-10 bg-neutral text-neutral-content">
+    <footer class="footer p-10 bg-neutral text-neutral-content translate-y-full">
             <div>
                 <img src="../assets/saven_logo_56px.png" width="150" />
                 <p class="pl-10"><b>Saven @ SMU</b><br />Raising awareness about energy consumption since 2022</p>
@@ -14,7 +13,6 @@
                 </div>
             </div>
         </footer>
-    </body>
 </template>
 
 <script setup lang="ts">
