@@ -54,4 +54,32 @@ const getUserById = async (id: string) => {
     }
 };
 
-export { getUserByEmail, createUser, getUserById };
+const updateUserById = async (
+    id: string,
+    name: string,
+    email: string,
+    address: string,
+    housingType: string,
+    householdMembers: number,
+    credits: number
+) => {
+    try {
+        const authToken = await auth.getAccessTokenSilently();
+        const res = await ky
+            .put(`${apiURL}/api/users/${id}`, {
+                json: {
+                    name,
+                    email,
+                    address,
+                    housingType,
+                    householdMembers,
+                    credits
+                },
+                headers: { Authorization: `Bearer ${authToken}` },
+            })
+            .json();
+        return res as any;
+    } catch (error) {}
+};
+
+export { getUserByEmail, createUser, getUserById, updateUserById };
