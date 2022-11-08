@@ -1,7 +1,7 @@
-export type userLeaderboard = {
+export type UserLeaderboard = {
     id: string;
     position: number;
-    computed_score: number;
+    computedScore: number;
     leaderboard: string;
     user: string;
     date_created: string;
