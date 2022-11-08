@@ -17,11 +17,12 @@ const routes: RouteRecordRaw[] = [
         component: () => import("./views/AnalyticsPage.vue"),
         beforeEnter: authGuard,
     },
-    // {
-    //     path: "/login",
-    //     name: "Login",
-    //     component: () => import("./views/LoginPage.vue"),
-    // },
+    {
+        path: "/edit",
+        name: "Edit Account",
+        component: () => import("./views/EditAccountPage.vue"),
+        beforeEnter: authGuard,
+    },
     {
         path: "/create",
         name: "Create Account",

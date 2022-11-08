@@ -26,7 +26,10 @@
 </template>
 
 <script setup lang="ts">
-const navItems = [{ navName: "Analytics", to: "/analytics" }];
+const navItems = [
+    { navName: "Analytics", to: "/analytics" },
+    { navName: "Profile", to: "/edit" },
+];
 </script>
 
 <style scoped></style>

@@ -20,37 +20,8 @@
                         </router-link>
                     </a>
                 </li>
-                <li tabindex="0">
-                    <!-- the hover part idk why its not staying when i hover over it :sob: -->
-                    <!-- also the hover box goes under the artwork idk how to fix that will relook -->
-                    <a>
-                        Hover Me
-                        <svg
-                            class="fill-current"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
-                            />
-                        </svg>
-                    </a>
-                    <ul
-                        class="dropdown-content menu rounded-box z-40 w-52 bg-base-100 p-2 shadow"
-                    >
-                        <li><a>Du du du du</a></li>
-                        <li><a>Dududu du</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a @click="getUserDetails">
-                        <router-link to="/aboutus"> 
-                            About Us 
-                        </router-link> 
-                    </a>
-                </li>
+
+                <li><a @click="getUserDetails">About Us</a></li>
             </ul>
             <button
                 class="btn-secondary btn"
@@ -59,9 +30,32 @@
             >
                 Sign Up / Login
             </button>
-            <button class="btn-secondary btn" @click="onClickLogout" v-else>
-                Logout
-            </button>
+            <div class="dropdown-end dropdown" v-else>
+                <label tabindex="0" class="btn-ghost btn-circle avatar btn">
+                    <div class="w-12 rounded-full" v-if="userRes.user.value">
+                        <span v-html="getAvatar(userRes.user.value.id)"></span>
+                    </div>
+                </label>
+                <ul
+                    tabindex="0"
+                    class="dropdown-content menu rounded-box menu-compact mt-3 w-52 bg-base-100 p-2 shadow"
+                >
+                    <router-link to="/edit">
+                        <li>
+                            <a class="justify-between"> Profile </a>
+                        </li>
+                    </router-link>
+                    <router-link to="/analytics">
+                        <li>
+                            <a class="justify-between">
+                                Analytics
+                                <span class="badge">New</span>
+                            </a>
+                        </li></router-link
+                    >
+                    <li @click="onClickLogout"><a>Logout</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </template>
@@ -71,10 +65,13 @@ import { useAuth0 } from "@auth0/auth0-vue";
 import { useRouter } from "vue-router";
 import { useUserStore } from "../stores/user";
 import { createUser, getUserByEmail } from "../composables/api/user";
+import { storeToRefs } from "pinia";
+import getAvatar from "../composables/AvatarGenerator";
 
 const { isAuthenticated, loginWithPopup, logout, user } = useAuth0();
 const router = useRouter();
 const userStore = useUserStore();
+const userRes = storeToRefs(userStore);
 
 const login = async () => {
     try {

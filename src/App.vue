@@ -1,10 +1,15 @@
 <template>
     <main class=" min-h-screen">
         <Navbar />
-        <div class="w-full bg-gradient-to-b from-primary to-[#FFFFF9]" :class="containerClass">
+        <div
+            class="flex w-full bg-gradient-to-b from-primary to-white"
+            :class="containerClass"
+        >
             <SideDrawer v-if="isPrivatePages" />
-            <router-view class="max-h-full w-2/3 flex-grow" :class="{ 'overflow-y-scroll': isPrivatePages }" />
+            <router-view class="max-h-full w-2/3 flex-grow" />
         </div>
+
+        <Toast />
     </main>
     <!-- <Footer /> -->
 </template>
@@ -16,6 +21,7 @@ import { useRoute } from "vue-router";
 import Navbar from "./components/Navbar.vue";
 import Footer from "./components/Footer.vue"
 import SideDrawer from "./components/SideDrawer.vue";
+import Toast from "./components/Toast.vue";
 
 const isPrivatePages = ref(false);
 const route = useRoute();
@@ -25,7 +31,7 @@ const containerClass = computed(() => {
     if (isPrivatePages) {
         retObj = {
             flex: true,
-            "max-h-[800px]": true,
+            "max-h-[900px]": true,
         };
     }
     return retObj;
@@ -37,7 +43,7 @@ watch(
         if (
             newRouteName &&
             (newRouteName.toString() === "Analytics" ||
-                newRouteName.toString() === "Settings")
+                newRouteName.toString() === "Edit Account")
         )
             isPrivatePages.value = true;
         else isPrivatePages.value = false;
