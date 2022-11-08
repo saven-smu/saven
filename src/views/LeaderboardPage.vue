@@ -39,7 +39,11 @@
                 <!-- <option value="3">Month</option> -->
             </select>
         </div>
-        <LeaderboardTable v-motion-slide-top :leaderboard="leaderboardArrRef" />
+        <LeaderboardTable
+            v-motion-slide-top
+            :leaderboard-date="leaderboardDate"
+            :leaderboard="leaderboardArrRef"
+        />
     </div>
 </template>
 
@@ -57,6 +61,7 @@ import { Leaderboard } from "../types/leaderboard";
 const leaderboardArrRef: Ref<UserLeaderboard[]> = ref([]);
 const utilityIndex = ref(4);
 const timeIndex = ref(1);
+const leaderboardDate = ref("");
 
 onMounted(() => {
     populateLeaderboard();
@@ -70,10 +75,13 @@ const populateLeaderboard = useDebounceFn(async () => {
     const today = new Date();
     let leaderboardToCheck = leaderboardRes.filter((leaderboard) => {
         if (timeIndex.value === 1) {
-            return (
+            const res =
                 dayjs(leaderboard.storedDateTime).format("DD/MM/YYYY") ===
-                dayjs(today).subtract(2, "days").format("DD/MM/YYYY")
-            );
+                dayjs(today).subtract(2, "days").format("DD/MM/YYYY");
+            if (res) {
+                leaderboardDate.value = dayjs(today).format("DD MMM YYYY");
+                return true;
+            }
         } else {
             return true;
         }
