@@ -2,7 +2,7 @@
     <main>
         <Navbar />
         <div
-            class="w-full bg-gradient-to-b from-primary to-white"
+            class="w-full bg-gradient-to-b from-primary to-white flex"
             :class="containerClass"
         >
             <SideDrawer v-if="isPrivatePages" />
@@ -29,7 +29,7 @@ const containerClass = computed(() => {
     if (isPrivatePages) {
         retObj = {
             flex: true,
-            "max-h-[800px]": true,
+            "max-h-[900px]": true,
         };
     }
     return retObj;

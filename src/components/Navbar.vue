@@ -44,6 +44,8 @@
                         <li><a>Dududu du</a></li>
                     </ul>
                 </li>
+
+                <li><router-link to="/analytics">Analytics</router-link></li>
                 <li><a @click="getUserDetails">About Us</a></li>
             </ul>
             <button
