@@ -33,6 +33,11 @@ const routes: RouteRecordRaw[] = [
         name: "404",
         component: () => import("./views/NotFoundPage.vue"),
     },
+    {
+        path: "/aboutus",
+        name: "About Us",
+        component: () => import("./views/AboutUs.vue"),
+    },
 ];
 
 const router = createRouter({

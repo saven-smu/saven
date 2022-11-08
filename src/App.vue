@@ -1,5 +1,5 @@
 <template>
-    <main>
+    <main class=" min-h-screen">
         <Navbar />
         <div
             class="flex w-full bg-gradient-to-b from-primary to-white"
@@ -11,6 +11,7 @@
 
         <Toast />
     </main>
+    <!-- <Footer /> -->
 </template>
 
 <script setup lang="ts">
@@ -18,6 +19,7 @@ import { computed } from "@vue/reactivity";
 import { ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import Navbar from "./components/Navbar.vue";
+import Footer from "./components/Footer.vue"
 import SideDrawer from "./components/SideDrawer.vue";
 import Toast from "./components/Toast.vue";
 
@@ -49,4 +51,6 @@ watch(
 );
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>
