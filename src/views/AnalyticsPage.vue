@@ -1,6 +1,10 @@
 <template>
     <div class="container mx-auto grid gap-4 p-4 px-12 md:grid-cols-2">
-        <p class="col-span-full mb-8 text-6xl">
+        <p class="col-span-full mb-8 text-6xl">Today you have used</p>
+        <div class="col-span-full flex justify-evenly">
+            <DailyUtilityChart :bills="dailyBills" />
+        </div>
+        <p class="col-span-full my-8 text-6xl">
             Compared to the previous 7 days, you saw...
         </p>
         <div class="col-span-full flex justify-evenly">
@@ -104,9 +108,11 @@ import { onMounted, ref } from "vue";
 import UtilityChart from "../components/UtilityChart.vue";
 import { Utility } from "../types/utility";
 import DifferenceBox from "../components/DifferenceBox.vue";
+import DailyUtilityChart from "../components/DailyUtilityChart.vue";
 
 const { user } = storeToRefs(useUserStore());
 const bills = ref<Map<string, BillChartData>>(new Map());
+const dailyBills = ref<Bill[]>([]);
 const avgBills = ref<Map<string, BillChartData>>(new Map());
 const costSavedWater = ref(0),
     costSavedElectricity = ref(0),
@@ -131,8 +137,12 @@ const getBills = async () => {
             bills.value = getComputedBillData(res);
 
             // We also want to find the amount saved
-            const prevDataArr = [...res.entries()].slice(6);
-            const currDataArr = [...res.entries()].slice(7, res.length);
+            const mapAsArr = [...res.entries()];
+            const prevDataArr = mapAsArr.slice(6);
+            const currDataArr = mapAsArr.slice(7, res.length);
+            dailyBills.value = [...bills.value.values()][
+                [...bills.value.values()].length - 1
+            ].bills;
 
             let prevWeekWaterCost = 0,
                 prevWeekGasCost = 0,
