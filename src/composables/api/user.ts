@@ -33,6 +33,7 @@ const createUser = async (
                     address,
                     housingType,
                     householdMembers,
+                    credits: 0
                 },
                 headers: { Authorization: `Bearer ${authToken}` },
             })
@@ -41,4 +42,16 @@ const createUser = async (
     } catch (error) {}
 };
 
-export { getUserByEmail, createUser };
+const getUserById = async (id: string) => {
+    try {
+        const authToken = await auth.getAccessTokenSilently();
+        const res = await ky(`${apiURL}/api/users/${id}`, {
+            headers: { Authorization: `Bearer ${authToken}` },
+        }).json();
+      return res as User;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export { getUserByEmail, createUser, getUserById };
