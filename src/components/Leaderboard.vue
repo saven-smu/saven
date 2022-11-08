@@ -1,5 +1,7 @@
 <template>
-    <div class="w-full overflow-x-auto rounded-xl bg-base-100 px-16 py-6 shadow-xl shadow-primary/30">
+    <div
+        class="w-full overflow-x-auto rounded-xl bg-base-100 px-16 py-6 shadow-xl shadow-primary/30"
+    >
         <div>
             <div class="grid grid-cols-12 font-bold">
                 <div class="col-span-1">Rank</div>
@@ -10,7 +12,7 @@
 
             <div
                 class="mt-4 grid grid-cols-12"
-                v-for="entry in leaderboardArrRef"
+                v-for="entry in props.leaderboard"
                 :key="entry.id"
             >
                 <div class="col-span-1 flex items-center">
@@ -31,7 +33,7 @@
                             <div class="font-bold">{{ entry.id }}</div>
                             <span
                                 v-if="entry.position === 1"
-                                class="badge badge-ghost badge-sm"
+                                class="badge-ghost badge badge-sm"
                             >
                                 🏅 Top 10, Aug 2022 🏅
                             </span>
@@ -45,7 +47,7 @@
                     <div class="collapse">
                         <input type="checkbox" />
                         <div
-                            class="btn btn-ghost btn-xs collapse-title justify-start text-[#838383] underline"
+                            class="collapse-title btn-ghost btn-xs btn justify-start text-[#838383] underline"
                         >
                             more details
                         </div>
@@ -62,33 +64,11 @@
 <script setup lang="ts">
 import { createAvatar } from "@dicebear/avatars";
 import * as style from "@dicebear/open-peeps";
-import { onMounted, Ref, ref } from "vue";
-import { getUserLeaderboard } from "../composables/api/userLeaderboard";
-import { userLeaderboard } from "../types/userleaderboard";
-import { getUserById } from "../composables/api/user";
+import { UserLeaderboard } from "../types/userLeaderboard";
 
-const leaderboardArrRef: Ref<any[]> = ref([]);
-
-onMounted(async () => {
-    const res = await getUserLeaderboard();
-    if (res){
-        const all = res.filter(obj => obj.leaderboard === 'ceea60a9-aa72-4e26-9c7d-7d51ffb7faf0');
-        const sortAll = all.sort(
-        (firstObject: userLeaderboard, secondObject: userLeaderboard) =>
-            (firstObject.position > secondObject.position) ? 1 : -1
-    );
-    for (const entry of sortAll) {
-            entry.id = await getUserName(entry.user);
-            leaderboardArrRef.value.push(entry);
-        }
-    }
-});
-
-const getUserName = async (id: string) =>{
-    const res = await getUserById(id);
-    const name = res?.name || "" ;
-    return name;
-}
+const props = defineProps<{
+    leaderboard: UserLeaderboard[];
+}>();
 </script>
 
 <style scoped></style>
