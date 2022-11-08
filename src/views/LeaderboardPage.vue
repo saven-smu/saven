@@ -63,8 +63,8 @@ const utilityIndex = ref(4);
 const timeIndex = ref(1);
 const leaderboardDate = ref("");
 
-onMounted(() => {
-    populateLeaderboard();
+onMounted(async () => {
+    await populateLeaderboard();
 });
 
 const populateLeaderboard = useDebounceFn(async () => {

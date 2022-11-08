@@ -21,7 +21,9 @@
                     </a>
                 </li>
 
-                <li><a @click="getUserDetails">About Us</a></li>
+                <router-link to="/edit">
+                    <li><a>About Us</a></li>
+                </router-link>
             </ul>
             <button
                 class="btn-secondary btn"
