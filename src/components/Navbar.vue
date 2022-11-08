@@ -21,7 +21,7 @@
                     </a>
                 </li>
 
-                <router-link to="/edit">
+                <router-link to="/aboutus">
                     <li><a>About Us</a></li>
                 </router-link>
             </ul>

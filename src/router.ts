@@ -29,14 +29,14 @@ const routes: RouteRecordRaw[] = [
         component: () => import("./views/CreateAccountPage.vue"),
     },
     {
-        path: "/:pathMatch(.*)*",
-        name: "404",
-        component: () => import("./views/NotFoundPage.vue"),
-    },
-    {
         path: "/aboutus",
         name: "About Us",
         component: () => import("./views/AboutUs.vue"),
+    },
+    {
+        path: "/:pathMatch(.*)*",
+        name: "404",
+        component: () => import("./views/NotFoundPage.vue"),
     },
 ];
 
